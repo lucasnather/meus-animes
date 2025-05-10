@@ -1,0 +1,33 @@
+services:
+  mysql:
+    image: 'bitnami/mysql:latest'
+    container_name: animes
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=testesenhaforte
+      - MYSQL_PASSWORD=teste
+      - MYSQL_DATABASE=animes
+      - MYSQL_USER=natherzito
+    networks:
+      - app-anime
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - app-anime
+    depends_on:
+      - mysql
+
+
+networks:
+  app-anime:
+    driver: bridge
+
+volumes:
+  mysql_data:
