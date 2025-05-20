@@ -23,5 +23,6 @@ class FindUserByIdService:
                     "name": find_user.name,
                     "email": find_user.email,
                     "username": find_user.username,
+                    "password": find_user.password,
                 }
             }
