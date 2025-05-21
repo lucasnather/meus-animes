@@ -16,6 +16,7 @@ class DatabaseConnection:
             raise
 
     def create_tables(self):
+        
         SQLModel.metadata.create_all(self.engine)
 
     def create_session(self) -> Session:

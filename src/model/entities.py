@@ -14,6 +14,10 @@ class User(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
+    model_config = {
+        "from_attributes": True
+    }
+
 class Animes(SQLModel, table=True):
     id: int = Field(primary_key=True)
     name: str
@@ -28,16 +32,28 @@ class Animes(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
+    model_config = {
+        "from_attributes": True
+    }
+
+    
+
 class Goals(SQLModel, table=True):
     id: int = Field(primary_key=True)
-    days_to_finish: int
+    days_to_finish_initial: int
+    days_to_finish_update: int | None =  Field(default=None)
     episodes_watched: int
     episodes_anime: int
     episodes_per_day: int
-    is_late_or_ahead: str
+    days_in_a_row: int = Field(default=0)
+    is_active:bool = Field(default=True)
 
     animes_id: int = Field(default=None, foreign_key="animes.id")
     animes: Animes =  Relationship(back_populates="goals")
 
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
+
+    model_config = {
+        "from_attributes": True
+    }
